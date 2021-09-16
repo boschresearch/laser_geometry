@@ -32,6 +32,8 @@
 
 #include <algorithm>
 #include <string>
+#include <iostream>
+#include <iomanip>
 
 #include "rclcpp/time.hpp"
 
@@ -423,6 +425,7 @@ void LaserProjection::transformLaserScanToPointCloud_(
   double range_cutoff,
   int channel_options)
 {
+  std::cout << "!!!!!!!!!!!!!!!!!!!!!!!!!!!! I do work!!!!\n";
   TIME start_time = scan_in.header.stamp;
   TIME end_time = scan_in.header.stamp;
   // TODO(anonymous): reconcile all the different time constructs
@@ -431,6 +434,8 @@ void LaserProjection::transformLaserScanToPointCloud_(
       rclcpp::Duration(
       std::chrono::duration<double>((scan_in.ranges.size() - 1) * scan_in.time_increment));
   }
+  std::cout << std::fixed;
+  std::cout << "Time from " << std::setprecision(6) << start_time.seconds() << " to " << end_time.seconds() << std::endl;
 
   std::chrono::nanoseconds start(start_time.nanoseconds());
   std::chrono::time_point<std::chrono::system_clock, std::chrono::nanoseconds> st(start);
